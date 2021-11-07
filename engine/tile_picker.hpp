@@ -1,26 +1,23 @@
 #pragma once
 #include <engine/tileset.hpp>
+#include <ui/ux.hpp>
+#include <cstdint>
 
-struct TilePicker 
+struct TilePicker
 {
-    struct Entry 
+    struct Context
     {
-        bool present;
-        int value;
+        int id;
+        TilePicker *picker;
     };
-    int picked;
+    Context contexts[1024];
+    size_t context_count;
+    int picked = 0;
+    Ux *ux;
+    Ui::Panel *root;
 
-    Entry *entries;  
-
-    TilePicker();
-    ~TilePicker();
-    
-    void
-    add_tile(int value);
-
-    bool
-    update();
+    TilePicker(Ux *ux);
 
     void
-    draw(Tileset &tileset);
+    use_tileset(Tileset &tileset);
 };

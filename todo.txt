@@ -1,0 +1,6 @@
+#TODO: Write a generic allocator
+#TODO: Implement popup
+#TODO: Implement range
+#TODO: Implement input field
+#TODO: Implement icons
+#TODO: Implement treeview

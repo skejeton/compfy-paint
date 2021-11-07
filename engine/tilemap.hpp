@@ -1,11 +1,12 @@
 #pragma once
+#define PAIR_COUNT (1 << 16)
 
-struct TilePosition 
+struct TilePosition
 {
     int x, y;
 };
 
-struct Tilemap 
+struct Tilemap
 {
     struct Pair
     {
@@ -22,9 +23,8 @@ struct Tilemap
     void
     put(int x, int y, int value);
 
-    void 
+    void
     erase(int x, int y);
-
 
     bool
     has_tile_at(int x, int y);

@@ -1,3 +1,0 @@
-/home/ishidex2/progs/comfy/bin/CMakeFiles/rebuild_cache.dir
-/home/ishidex2/progs/comfy/bin/CMakeFiles/edit_cache.dir
-/home/ishidex2/progs/comfy/bin/CMakeFiles/comfyengine.dir

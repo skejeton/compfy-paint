@@ -1,13 +1,11 @@
 /* Handles drawing and input into a viewport */
 #pragma once
 #include <ext/raylib.h>
+#include <core/math.hpp>
 
 struct Viewport
 {
-    int at_x;
-    int at_y;
-    int sz_w;
-    int sz_h;
+    recti rect;
 
     Vector2
     get_mouse_position();
@@ -23,4 +21,7 @@ struct Viewport
 
     void
     draw_rectangle(int x, int y, int w, int h, Color color);
+    
+    void
+    draw_pixel(int x, int y, Color color);
 };

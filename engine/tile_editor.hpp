@@ -8,22 +8,24 @@
 
 struct TilemapEditor
 {
-    int tile_width;
-    int tile_height;
-    int tile_x_selected;
-    int tile_y_selected;
-    int panning_x;
-    int panning_y;
+    vi2 last_tile_selected;
+    vi2 tile_selected;
+    bool placing = false;
     TrackCursor tracker;
     Tilemap tilemap;
     Ui::Panel *panel;
-    // If previous tile was cleared, this will clear
-    // All the consecutive ones touched when mouse is dragged
-    bool clear_mode;
+    float zoom_target = 8.0;
+    Camera2D camera = {
+        .offset = { 0, 0 },
+        .target = { 0, 0 },
+        .zoom = 8.0,
+    };
     int selected_tile = 0;
+
 
     void
     update();
+
     void
     draw(Tileset &tileset);
 };

@@ -3,12 +3,13 @@
 #include "engine/viewport.hpp"
 #include <cstddef>
 #include <engine/window_frame.hpp>
+#include <core/dispatch.hpp>
 
 struct Ui
 {
     struct Dimension
     {
-        enum Unit 
+        enum Unit
         {
             PIXEL,
             RELATIVE,
@@ -32,13 +33,16 @@ struct Ui
         Dimension width;
         Dimension height;
         Color color = { 0, 0, 0, 0 };
+        bool hide_overflow = false;
     };
 
     struct Panel
     {
         Panel *first_child = NULL;
         Panel *sibling = NULL;
-
+        vf2 scroll_vel = { 0, 0 };
+        vi2 scroll = { 0, 0 };
+        vi2 calc_scroll = { 0, 0 };
         int real_width = 0;
         int real_height = 0;
         int real_x = 0;
@@ -48,16 +52,14 @@ struct Ui
         Style style;
         Viewport viewport()
         {
-            return { real_x, real_y, real_width, real_height };
+            return {{ real_x + calc_scroll.x, real_y + calc_scroll.y, real_width, real_height }};
         }
         bool present = false;
         bool is_mouse_over = false;
-        bool is_pressed;
+        bool is_pressed = false;
 
-        void *self = NULL;
-        void *self2 = NULL;
-        void (*draw)(void *self) = NULL;
-        void (*on_press)(void *self) = NULL;
+        Selfcall<void> draw;
+        Dispatch<> on_click;
     };
 
     Panel *panels;
@@ -71,6 +73,12 @@ struct Ui
 
     Panel*
     panel(Style style);
+
+    void
+    destroy(Panel *panel);
+
+    void
+    destroy_all_children(Panel *panel);
 
     void
     update();

@@ -2,7 +2,7 @@
 
 struct LayoutFlex
 {
-    int primary = 0;  
+    int primary = 0;
     int secondary = 0;
     float rel = 0;
 
@@ -13,7 +13,7 @@ struct LayoutFlex
         this->rel += rel;
         secondary = math::max(secondary, sc);
     }
-    
+
     float
     multiplier(float fac)
     {

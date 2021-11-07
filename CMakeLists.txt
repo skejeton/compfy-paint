@@ -5,6 +5,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "")
 set(CMAKE_SYSTEM_NAME Windows)
 set(TOOLCHAIN_PREFIX x86_64-w64-mingw32)
 
+# I stole this from someone lol
 if (${CMAKE_BUILD_TYPE} STREQUAL "WindowsFromLinux")
 # cross compilers to use for C, C++ and Fortran
     set(CMAKE_C_COMPILER ${TOOLCHAIN_PREFIX}-gcc)
@@ -25,12 +26,16 @@ endif()
 file(GLOB comfyengine_SRC
      "engine/**.cpp"
      "ui/**.cpp"
+     "core/**.cpp"
 )
 
-if (NOT MSVC)
+if(NOT MSVC)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    if(${CMAKE_BUILD_TYPE} STREQUAL "WindowsFromLinux")
+        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
+    endif()
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
-        # Enable sanitizers
+# Enable sanitizers
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined")
     endif()
@@ -41,12 +46,12 @@ endif()
 add_executable(comfyengine ${comfyengine_SRC})
 target_include_directories(comfyengine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 if (${CMAKE_BUILD_TYPE} STREQUAL "WindowsFromLinux")
-     target_link_libraries(comfyengine 
+     target_link_libraries(comfyengine
         ${CMAKE_SOURCE_DIR}/ext/libraylib_windows.a
         winmm)
 elseif (UNIX AND NOT APPLE)
-    target_link_libraries(comfyengine 
-        ${CMAKE_SOURCE_DIR}/ext/libraylib_linux.a 
+    target_link_libraries(comfyengine
+        ${CMAKE_SOURCE_DIR}/ext/libraylib_linux.a
         dl pthread)
 endif()
 

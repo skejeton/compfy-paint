@@ -7,6 +7,12 @@ struct TrackCursor
 {
     int prev_x;
     int prev_y;
+    // This will create a 1-frame latency
+    // this is needed because raylib sometimes reports
+    // incorrect mouse position info, the correct
+    // mouse position info will be reported only the second frame
+    bool restore_latch = false;
+    Vector2 restore;
     bool tracking = false;
 
     TrackCursor();
@@ -22,5 +28,9 @@ struct TrackCursor
 
     void
     stop();
+    
+private:
+    Vector2
+    mouse_position();
 };
 

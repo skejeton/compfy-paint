@@ -5,12 +5,12 @@ static Viewport
 get_outer_viewport(WindowFrame *self)
 {
     Viewport &v = self->viewport;
-    return {
-        v.at_x-2,
-        v.at_y-22,
-        v.sz_w+4,
-        v.sz_h+24
-    };
+    return {{
+        v.rect.x()-2,
+        v.rect.y()-22,
+        v.rect.w()+4,
+        v.rect.h()+24
+    }};
 }
 
 void
@@ -42,17 +42,17 @@ WindowFrame::update()
     };
     if (mode == DRAGGING) 
     {
-        viewport.at_x += motion.x;
-        viewport.at_y += motion.y;
+        viewport.rect.x() += motion.x;
+        viewport.rect.y() += motion.y;
         prev_mouse_pos = current_mouse_pos;
     }
     else if (mode == RESIZING) {
         SetMouseCursor(MOUSE_CURSOR_RESIZE_ALL);
-        viewport.sz_w += motion.x;
-        viewport.sz_h += motion.y;
+        viewport.rect.w() += motion.x;
+        viewport.rect.h() += motion.y;
         // Please no small windows
-        if (viewport.sz_w < 20) viewport.sz_w = 20;
-        if (viewport.sz_h < 20) viewport.sz_h = 20;
+        if (viewport.rect.w() < 20) viewport.rect.w() = 20;
+        if (viewport.rect.h() < 20) viewport.rect.h() = 20;
         prev_mouse_pos = current_mouse_pos;
     }
     else {
@@ -64,7 +64,7 @@ void
 WindowFrame::draw()
 {
     Viewport outer = get_outer_viewport(this);
-    outer.draw_rectangle(0, 0, outer.sz_w, outer.sz_h, WHITE);
-    outer.draw_text(title, 2, 0, 20, BLACK);
-    viewport.draw_rectangle(0, 0, viewport.sz_w, viewport.sz_h, Color { 2, 10, 7, 255 });
+    outer.draw_rectangle(0, 0, outer.rect.w(), outer.rect.h(), { 50, 50, 50, 255 });
+    outer.draw_text(title, 10, 6, 10, GRAY);
+    viewport.draw_rectangle(0, 0, viewport.rect.w(), viewport.rect.h(), Color { 2, 10, 7, 255 });
 }

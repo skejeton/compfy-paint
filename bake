@@ -1,5 +1,5 @@
 #!/bin/sh
 
-mkdir -p bin 
+mkdir -p bin
 cd bin
 cmake -DCMAKE_BUILD_TYPE=Debug ../ && make
