@@ -30,9 +30,9 @@ file(GLOB comfyengine_SRC
 )
 
 if(NOT MSVC)
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
     if(${CMAKE_BUILD_TYPE} STREQUAL "WindowsFromLinux")
-        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static")
     endif()
     if (${CMAKE_BUILD_TYPE} STREQUAL "Debug")
 # Enable sanitizers
@@ -40,7 +40,7 @@ if(NOT MSVC)
         set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined")
     endif()
     if (${CMAKE_BUILD_TYPE} STREQUAL "Release")
-        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -static-libstdc++")
+        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
     endif()
 else()
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /std:c++14")
@@ -48,13 +48,13 @@ endif()
 
 add_executable(comfyengine ${comfyengine_SRC})
 target_include_directories(comfyengine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-if (${CMAKE_BUILD_TYPE} STREQUAL "WindowsFromLinux")
+if(${CMAKE_BUILD_TYPE} STREQUAL "WindowsFromLinux")
      target_link_libraries(comfyengine
         ${CMAKE_SOURCE_DIR}/ext/libraylib_windows.a
         winmm)
-elseif (UNIX AND NOT APPLE)
+elseif(UNIX AND NOT APPLE)
     target_link_libraries(comfyengine
         ${CMAKE_SOURCE_DIR}/ext/libraylib_linux.a
-        dl pthread)
+        /usr/lib/libc.so.6 dl pthread)
 endif()
 
