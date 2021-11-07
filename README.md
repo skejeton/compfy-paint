@@ -7,6 +7,18 @@ a pixel art tool with infinite canvas.
 ![cover](cover.png)
 
 ```
+CONTROLS:
+
+use left mouse button to select colors and press on the grid to place them.
+you can zoom in using mouse wheel, also, if you press the mouse wheel you can
+drag your canvas (on trackpad, press on the bottom middle, and drag).
+
+to erase, hold right mouse button and paint.
+
+its not necessary to use load/save buttons as it autosaves/autoloads.
+```
+
+```
 this is a just for fun project. but i want to make a decent pixel art
 tool that will be nice to use, doesn't rely on too many dependencies
 (aside from C standard library it currently only depends on raylib). 
@@ -22,12 +34,5 @@ the pixel art tool idea because i think it's just more fun. that's why
 there's some legacy weird stuff, like "tilemap" "tileset" etc...
 
 the demo (as of Nov 7th, 2021) was made in 1-2 weeks so its not perfect.
-
-
-
-
-
-
-
 ```
 
