@@ -98,6 +98,12 @@ Editor::setup_ui()
             }
         }
     });
+    
+    picker.on_color_selected.subscribe(this, [](void *self_, int id){
+        auto self = (Editor*)(self_);
+        self->color_picker.set_color(self->tileset.get_color(id));
+    });
+    
     add_color->style.width = { Ui::Dimension::RELATIVE, 1.0 };
     add_color->style.height = { Ui::Dimension::PIXEL, 30 };
     add_color->style.margin = 10;

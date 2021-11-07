@@ -19,6 +19,7 @@ on_press(void *self___)
     auto *self = (TilePicker::Context*)self___;
 
     self->picker->picked = self->id;
+    self->picker->on_color_selected(self->id);
 }
 
 static void

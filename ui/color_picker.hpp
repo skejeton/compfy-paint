@@ -22,6 +22,9 @@ struct UiColorPicker
     Color
     get_color();
     
+    void
+    set_color(Color color);
+    
     // Draw the gizmo
     void
     draw(recti rect);

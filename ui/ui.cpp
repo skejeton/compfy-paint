@@ -249,10 +249,11 @@ Ui::update()
         Panel &panel = panels[i];
         if (!panel.present)
             continue;
+            
         panel.scroll.y += panel.scroll_vel.y*GetFrameTime();
         panel.scroll_vel.y /= 1.2;
-        panel.scroll.x = math::min(panel.scroll.x, 0);
-        panel.scroll.y = math::min(panel.scroll.y, 0);
+        panel.scroll.x = math::min(panel.scroll.x, 0.0);
+        panel.scroll.y = math::min(panel.scroll.y, 0.0);
     }
 
     for (int i = 0; i < PANEL_COUNT; i += 1)

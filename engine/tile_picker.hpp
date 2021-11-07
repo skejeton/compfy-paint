@@ -10,6 +10,7 @@ struct TilePicker
         int id;
         TilePicker *picker;
     };
+    Dispatch<int> on_color_selected;
     Context contexts[1024];
     size_t context_count;
     int picked = 0;

@@ -41,7 +41,7 @@ struct Ui
         Panel *first_child = NULL;
         Panel *sibling = NULL;
         vf2 scroll_vel = { 0, 0 };
-        vi2 scroll = { 0, 0 };
+        vf2 scroll = { 0, 0 };
         vi2 calc_scroll = { 0, 0 };
         int real_width = 0;
         int real_height = 0;

@@ -36,7 +36,16 @@ UiColorPicker::~UiColorPicker()
     UnloadTexture(hue_sat);
 }
 
-
+void
+UiColorPicker::set_color(Color color)
+{
+    Vector3 hsv = ColorToHSV(color);
+    printf("%g %g %g\n", hsv.x, hsv.y, hsv.z);
+    
+    this->hue_sat_x = hsv.x/360.0*PIXEL_BOUNDS;
+    this->hue_sat_y = (1.0-hsv.y)*PIXEL_BOUNDS;
+    this->value = hsv.z;
+}
 
 // Returns the requested color you picked
 Color
